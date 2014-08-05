@@ -1,6 +1,6 @@
 from ImplementedClass import ImplementedClass
 
-def Implemented_instance():
+def implemented_instance():
 	return ImplementedClass(
 		visible = 'visible',
 		virtual = 'virtual',
@@ -21,7 +21,7 @@ def test_bad_init():
 	assert success == True
 
 def test_bad_dirty():
-	a = Implemented_instance()
+	a = implemented_instance()
 	try:
 		a.__cache__ = {}
 		success = False
@@ -35,14 +35,14 @@ def test_bad_dirty():
 	assert success == True
 
 def test_init():
-	a = Implemented_instance()
+	a = implemented_instance()
 	assert a.visible == 'visible'
 	assert a.virtual == 'virtual'
 	assert a.list == []
 	assert a.is_dirty == False
 
 def test_dirty():
-	a = Implemented_instance()
+	a = implemented_instance()
 	assert a.is_dirty == False
 	a.new_variable = None
 	assert a.is_dirty == True
