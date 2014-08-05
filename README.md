@@ -14,7 +14,7 @@ initialization.
 
 Calling `DirtyDetector.save` will reset the `is_dirty` field to `False`.
 
-An example usage case can be found in `ApplicationClass.py`.
+An example usage case can be found in `ImplementedClass.py`.
 
 Features
 ----
