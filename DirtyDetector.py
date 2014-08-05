@@ -44,7 +44,7 @@ class DirtyDetector(object):
 				self.__dict__['__is_dirty__'] = True
 			# only add an entry to the cache if the property already exists
 			elif k not in self.__dict__['__cache__']:
-				self.__dict__['__cache__'][k] = getattr(self, k, None)
+				self.__dict__['__cache__'][k] = deepcopy(getattr(self, k, None))
 		super(DirtyDetector, self).__setattr__(k, v)
 
 	def __getattribute__(self, k):
@@ -61,6 +61,7 @@ class DirtyDetector(object):
 
 		if not self.__dict__['__is_dirty__'] and k != 'is_dirty':
 			if k not in self.__dict__['__cache__']:
+				# saves a copy of the field at time of access
 				self.__dict__['__cache__'][k] = deepcopy(super(DirtyDetector, self).__getattribute__(k))
 
 		return super(DirtyDetector, self).__getattribute__(k)
