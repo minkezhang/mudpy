@@ -30,11 +30,16 @@ class DirtyDetector(object):
 			raise AttributeError('__cache__ is a reserved variable')
 		super(DirtyDetector, self).__setattr__(k, v)
 
+	def __getattribute__(self, k):
+		if k == '__cache__':
+			raise AttributeError('__cache__ is a reserved variable')
+		return super(DirtyDetector, self).__getattribute__(k)
+
 	@property
 	def is_dirty(self):
 		for k in self.__dict__:
 			if k != '__cache__':
-				if (k not in self.__cache__) or (self.__dict__[k] != self.__cache__[k]):
+				if (k not in self.__dict__['__cache__']) or (self.__dict__[k] != self.__dict__['__cache__'][k]):
 					return True
 		return False
 

@@ -23,5 +23,5 @@ The `DirtyDetector` class will work for property setters as well as instance var
 Caveats
 ----
 The `DirtyDetector` class employs the use of a cached copy of instance variables stored in `DirtyDetector.__cache__` -- overwriting `__cache__` manually thus is **highly 
-discouraged**. `DirtyDetector` overwrites the `__setattr__` method to test if the user is attempting to set the `__cache__` variable, but does **not** guard against 
-setting the cache via the dictionary key directly (via `DirtyDetector.__dict__['__cache__']`).
+discouraged**. `DirtyDetector` overwrites the `__setattr__` and `__getattribute__` methods to test if the user is attempting to set or get the `__cache__` variable, but 
+does **not** guard against setting the cache via the dictionary key directly (via `DirtyDetector.__dict__['__cache__']`).

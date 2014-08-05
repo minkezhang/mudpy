@@ -27,6 +27,11 @@ def test_bad_dirty():
 		success = False
 	except AttributeError:
 		success = True
+	try:
+		a.__cache__
+		success = False
+	except AttributeError:
+		success = True
 	assert success == True
 
 def test_init():
