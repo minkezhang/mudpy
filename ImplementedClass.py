@@ -1,14 +1,14 @@
 from DirtyDetector import DirtyDetector
 
 # example usage
-class ApplicationClass(DirtyDetector):
+class ImplementedClass(DirtyDetector):
 	def __init__(self, **kwargs):
 		self.visible = None
 		self._virtual_ = None
 		self.list = []
 		# sets self.visible if 'visible' exist in **kwargs
 		# sets self._virtual_ if '_virtual_' OR 'virtual' exists in **kwargs
-		super(ApplicationClass, self).__init__(**kwargs)
+		super(ImplementedClass, self).__init__(**kwargs)
 
 	@property
 	def virtual(self):
@@ -34,4 +34,6 @@ class ApplicationClass(DirtyDetector):
 
 	# write to file or other handler
 	def save(self):
-		super(ApplicationClass, self).save()
+		if self.is_dirty:
+			# this line must be included to reset the cache
+			super(ImplementedClass, self).save()

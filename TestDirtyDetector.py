@@ -1,7 +1,7 @@
-from ApplicationClass import ApplicationClass
+from ImplementedClass import ImplementedClass
 
-def application_instance():
-	return ApplicationClass(
+def Implemented_instance():
+	return ImplementedClass(
 		visible = 'visible',
 		virtual = 'virtual',
 		list = [],
@@ -10,16 +10,34 @@ def application_instance():
 		is_dirty = 'True'
 	)
 
+def test_bad_init():
+	try:
+		ImplementedClass(
+			__cache__ = {}
+		)
+		success = False
+	except AttributeError:
+		success = True
+	assert success == True
+
+def test_bad_dirty():
+	a = Implemented_instance()
+	try:
+		a.__cache__ = {}
+		success = False
+	except AttributeError:
+		success = True
+	assert success == True
 
 def test_init():
-	a = application_instance()
+	a = Implemented_instance()
 	assert a.visible == 'visible'
 	assert a.virtual == 'virtual'
 	assert a.list == []
 	assert a.is_dirty == False
 
 def test_dirty():
-	a = application_instance()
+	a = Implemented_instance()
 	assert a.is_dirty == False
 	a.new_variable = None
 	assert a.is_dirty == True
@@ -40,4 +58,6 @@ def test_dirty():
 
 if __name__ == '__main__':
 	test_init()
+	test_bad_init()
 	test_dirty()
+	test_bad_dirty()
