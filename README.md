@@ -25,4 +25,5 @@ Caveats
 ----
 The `DirtyDetector` class employs reserved variables `__cache__` and `__is_dirty__` -- undefined behavior will result if the user attempts to alter these fields 
 manually. `DirtyDetector.__getattribute__` and `DirtyDetector.__setattr__` employs guards to ensure these fields are not accessed via a call such as 
-`instance.__is_dirty__`, but does **not** guard against direct dictionary manipulation (e.g. `instance.__dict__['__is_dirty__']`).
+`instance.__is_dirty__`, but does **not** guard against direct dictionary manipulation (e.g. `instance.__dict__['__is_dirty__']`) of these two fields, or indeed **any** 
+instance field in this manner.
