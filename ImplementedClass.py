@@ -34,6 +34,8 @@ class ImplementedClass(DirtyDetector):
 
 	# write to file or other handler
 	def save(self):
+		# saving hook
 		if self.is_dirty:
-			# this line must be included to reset the cache
-			super(ImplementedClass, self).save()
+			pass
+		# this line must be included to reset the cache
+		super(ImplementedClass, self).save()
