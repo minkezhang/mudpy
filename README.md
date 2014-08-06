@@ -18,7 +18,7 @@ Calling `Mud.save` will reset the `is_dirty` field to `False`.
 An example usage case can be found in `BakedPie.py` (a ''cooked'' mud pie), but a barebones wrapper class is as follows:
 
 ```
-from Mud import Mud
+from mudpy.Mud import Mud
 
 # we're taking the joke and beating it to the ground
 # note that Mud comes last in the inheritance chain to preserve expected super(...) behavior
@@ -72,7 +72,10 @@ Furthermore, `Mud` can be inherited from Django classes (appending to the end of
 guard, thus replacing the more conventional, but less flexible, [django-dirtyfields](https://github.com/smn/django-dirtyfields) package:
 
 ```
-class DBPie(Models.Model, Mud):
+from django.db import models
+from mudpy.Mud import Mud
+
+class DBPie(models.Model, Mud):
 	def save(self, *args, **kwargs):
 		# self.id evaluates to False upon a new request (and so needs to be saved)
 		if not self.is_dirty and self.id:
