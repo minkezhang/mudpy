@@ -67,10 +67,19 @@ variable is not recommended, as it bypasses the checking system in place:
 
 ```
 p = BakedPie()
-p.visible = 'new_visible'			# this is okay
+
+# this is okay
+p.visible = 'new_visible'
 assert p.is_dirty == True
-p.save()					# save changes and set is_dirty to False
-p.__dict__['visible'] = 'another_new_visible'	# this is NOT recommmended
-assert p.is_dirty == False			# bypassed checking system
-p.save()					# does NOT save changes
+
+# save changes and set is_dirty to False
+p.save()
+
+# this is NOT recommended
+p.__dict__['visible'] = 'another_new_visible'
+# previous op bypassed checking system
+assert p.is_dirty == False
+
+# does NOT save changes
+p.save()
 ```
