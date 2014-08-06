@@ -99,14 +99,14 @@ against direct dictionary manipulation (e.g. `instance.__dict__['__is_dirty__']`
 variable is not recommended, as it bypasses the checking system in place:
 
 ```
-p = BakedPie()
+p = RawPie()
 
 ###
 # Good
 ###
 
 # this is okay
-p.visible = 'new_visible'
+p.filling = 'apple'
 
 assert p.is_dirty == True
 
@@ -118,7 +118,7 @@ p.save()
 ###
 
 # this is NOT recommended
-p.__dict__['visible'] = 'another_new_visible'
+p.__dict__['filling'] = 'cherry'
 
 # previous op bypassed checking system
 assert p.is_dirty == False
@@ -132,7 +132,7 @@ Moreover, as per [Python2](https://docs.python.org/2/library/stdtypes.html#speci
 guards these variables specifically by throwing an `AttributeError` when user attempts to set these variables:
 
 ```
-p = BakedPie()
+p = RawPie()
 
 # this is okay
 p.__dict__
@@ -145,3 +145,7 @@ except AttributeError:
 
 assert p.is_dirty == False
 ```
+
+Contact
+----
+* [gmail](minke.zhang@gmail.com)
