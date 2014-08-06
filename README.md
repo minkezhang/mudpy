@@ -148,4 +148,4 @@ assert p.is_dirty == False
 
 Contact
 ----
-* [gmail](minke.zhang@gmail.com)
+* [gmail](mailto:minke.zhang@gmail.com)
