@@ -37,22 +37,28 @@ def test_bad_dirty():
 		a.__cache__ = {}
 		success = False
 	except AttributeError:
-		success = True
+		pass
 	try:
 		a.__is_dirty__ = {}
 		success = False
 	except AttributeError:
-		success = True
+		pass
 	try:
 		a.__cache__
 		success = False
 	except AttributeError:
-		success = True
+		pass
 	try:
 		a.__is_dirty__
 		success = False
 	except AttributeError:
-		success = True
+		pass
+	# reserved variables as per Python documentation -- cf. Mud.__setattr__()
+	try:
+		a.__dict__ = {}
+		success = False
+	except AttributeError:
+		success = (a.__dict__ != {})
 	assert success == True
 
 def test_init():

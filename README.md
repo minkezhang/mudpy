@@ -126,3 +126,20 @@ assert p.is_dirty == False
 # does NOT save changes
 p.save()
 ```
+
+Moreover, as per [Python2](https://docs.python.org/2/library/stdtypes.html#special-attributes) and 
+[Python3](https://docs.python.org/3/library/stdtypes.html#special-attributes) documentation, several read-only variables are not guarded against changes:
+
+```
+p = BakedPie()
+
+# throws an error because the user is a bad, bad person
+#
+# who doesn't deserve pies
+try:
+	p.__dict__ = 3.14
+except AttributeError:
+	pass
+
+assert p.is_dirty == False
+```

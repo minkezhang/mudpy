@@ -37,6 +37,9 @@ class Mud(object):
 		if '__cache__' not in self.__dict__:
 			self.__dict__['__cache__'] = {}
 
+		if k in ('__dict__', '__methods__', '__members__', '__class__', '__bases__', '__name__', '__mro__', '__qualname__'):
+			raise AttributeError('%s is read-only' % k)
+
 		# adding to the cache only if __is_dirty__ is not yet set
 		if not self.__dict__['__is_dirty__']:
 			# new variables
@@ -53,8 +56,8 @@ class Mud(object):
 
 		# reserved, read-only attributes
 		# backwards-compatible and auto-escapes loop when k in ('__methods__', '__members__')
-		# cf. http://bit.ly/UUml3F
-		if k in ('__dict__', '__methods__', '__members__', '__class__', '__bases__', '__name__', '__mro__'):
+		# cf. http://bit.ly/UUml3F, http://bit.ly/X1C6ap
+		if k in ('__dict__', '__methods__', '__members__', '__class__', '__bases__', '__name__', '__mro__', '__qualname__'):
 			return super(Mud, self).__getattribute__(k)
 
 		# calling Derived.var before calling Mud.__init__
