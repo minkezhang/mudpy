@@ -81,7 +81,6 @@ def test_dirty():
 	assert a.is_dirty == True
 	a.save()
 	# the variable was READ from the object, but was change EXTERNALLY -- we should be able to detect this change
-	print('list.append')
 	a.list.append(0)
 	assert a.is_dirty == True
 	assert a.visible == 'new_visible'
@@ -99,11 +98,11 @@ def test_cache():
 	a.list
 	a.virtual
 	# virtual fields will set both the __dict__ name AND the associated @property name
-	assert set(a.__dict__['__cache__'].keys()) == set(['list', 'virtual', '_virtual_'])
+	assert set(a.__dict__['__cache__'].keys()).issuperset(['list', 'virtual', '_virtual_'])
 	a.save()
 	assert a.__dict__['__is_dirty__'] == False
 	# do not reset cache if is_dirty == False
-	assert set(a.__dict__['__cache__'].keys()) == set(['list', 'virtual', '_virtual_'])
+	assert set(a.__dict__['__cache__'].keys()).issuperset(['list', 'virtual', '_virtual_'])
 	a.list = [0]
 	a.save()
 	a.list
@@ -111,7 +110,7 @@ def test_cache():
 	a.new_variable = None
 	a.virtual
 	# cache keys will be added ONLY if __is_dirty__ is not yet set
-	assert set(a.__dict__['__cache__'].keys()) == set(['list', 'visible'])
+	assert set(a.__dict__['__cache__'].keys()).issuperset(['list', 'visible'])
 
 if __name__ == '__main__':
 	test_init()

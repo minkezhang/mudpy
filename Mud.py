@@ -31,14 +31,6 @@ class Mud(object):
 		if k in ('__cache__', '__is_dirty__'):
 			raise AttributeError('%s is a reserved variable' % k)
 
-		# test for method queries
-		try:
-			super(Mud, self).__getattribute__(k).im_self
-			super(Mud, self).__setattr__(k)
-			return
-		except AttributeError:
-			pass
-
 		# calling Derived.var = val before calling Mud.__init__
 		if '__is_dirty__' not in self.__dict__:
 			self.__dict__['__is_dirty__'] = False
@@ -64,12 +56,6 @@ class Mud(object):
 		# cf. http://bit.ly/UUml3F
 		if k in ('__dict__', '__methods__', '__members__', '__class__', '__bases__', '__name__', '__mro__'):
 			return super(Mud, self).__getattribute__(k)
-
-		try:
-			super(Mud, self).__getattribute__(k).im_self
-			return super(Mud, self).__getattribute__(k)
-		except AttributeError:
-			pass
 
 		# calling Derived.var before calling Mud.__init__
 		if '__is_dirty__' not in self.__dict__:

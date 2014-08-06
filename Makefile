@@ -1,5 +1,6 @@
 test: clean
-	python Test*.py; make clean
+	python2 Test*.py; make clean
+	python3 Test*.py; make clean
 
 clean:
-	rm -f *.pyc
+	rm -rf *.pyc __pycache__
