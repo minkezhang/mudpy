@@ -22,7 +22,7 @@ from mudpy.Mud import Mud
 
 # we're taking the joke and beating it to the ground
 # note that Mud comes last in the inheritance chain to preserve expected super(...) behavior
-class Pie(..., Mud):
+class RawPie(..., Mud):
 	# class attribute
 	cook_time = None
 	def __init__(self, *args, **kwargs):
