@@ -19,7 +19,8 @@ An example usage case can be found in `BakedPie.py` (a ''cooked'' mud pie), but 
 
 ```
 from Mud import Mud
-# we're running with the joke
+
+# we're taking the joke and beating it to the ground
 class Pie(Mud):
 	def __init__(self, *args, **kwargs):
 		# set some instance variables
