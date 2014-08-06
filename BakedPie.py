@@ -1,6 +1,9 @@
 from Mud import Mud
 
 # example usage
+# append Mud to end of the inheritance chain:
+#	class A(B, C, D, ..., Mud)
+# this preserves expected super(...) behavior
 class BakedPie(Mud):
 	def __init__(self, **kwargs):
 		self.visible = None
@@ -8,7 +11,7 @@ class BakedPie(Mud):
 		self.list = []
 		# sets self.visible if 'visible' exist in **kwargs
 		# sets self._virtual_ if '_virtual_' OR 'virtual' exists in **kwargs
-		super(BakedPie, self).__init__(**kwargs)
+		Mud.__init__(self, **kwargs)
 
 	@property
 	def virtual(self):
@@ -36,6 +39,8 @@ class BakedPie(Mud):
 	def save(self):
 		# saving hook
 		if self.is_dirty:
-			pass
-		# this line must be included to reset the cache
-		super(BakedPie, self).save()
+			# put other parent class saves here
+			# ...
+
+			# this line must be included to reset the cache
+			Mud.save(self)

@@ -100,7 +100,10 @@ def test_cache():
 	# virtual fields will set both the __dict__ name AND the associated @property name
 	assert set(a.__dict__['__cache__'].keys()) == set(['list', 'virtual', '_virtual_'])
 	a.save()
-	assert set(a.__dict__['__cache__'].keys()) == set([])
+	assert a.__dict__['__is_dirty__'] == False
+	# do not reset cache if is_dirty == False
+	print a.__dict__['__cache__'].keys()
+	assert set(a.__dict__['__cache__'].keys()) == set(['list', 'virtual', '_virtual_'])
 	a.list
 	a.visible
 	a.new_variable = None

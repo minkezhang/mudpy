@@ -21,13 +21,14 @@ An example usage case can be found in `BakedPie.py` (a ''cooked'' mud pie), but 
 from Mud import Mud
 
 # we're taking the joke and beating it to the ground
-class Pie(Mud):
+# note that Mud comes last in the inheritance chain to preserve expected super(...) behavior
+class Pie(..., Mud):
 	def __init__(self, *args, **kwargs):
 		# set some instance variables
 		self.filling = None
 
 		# will attempt to set 'filling' and 'is_cooked', but not 'chef'
-		super(Pie, self).__init__(**kwargs)
+		Mud.__init__(self, **kwargs)
 
 	# read-write property
 	@property
@@ -49,11 +50,12 @@ class Pie(Mud):
 	def save(self):
 		if not self.is_dirty:
 			return
+
 		# save the pie as a recipe
 		# ...
 
 		# reset self.is_dirty
-		super(Pie, self).save()
+		Mud.save(self)
 ```
 
 Features
