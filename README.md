@@ -78,7 +78,7 @@ from mudpy.Mud import Mud
 class DjangoPie(models.Model, Mud):
 	def __init__(self, *args, **kwargs):
 		# all instance-related fields are handled by Django
-		super(DBPie, self).__init__(*args, **kwargs)
+		super(DjangoPie, self).__init__(*args, **kwargs)
 
 		# for the side-effect of setting is_dirty and initializing the cache
 		Mud.__init__(self)
