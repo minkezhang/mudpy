@@ -87,6 +87,13 @@ def test_dirty():
 	assert a.virtual == 'new_virtual'
 	assert a.list == [0]
 
+def test_function():
+	a = implemented_instance()
+	def foo(self):
+		return self
+	a.f = foo
+	assert a.is_dirty == True
+
 # test caching behavior -- this is NOT guaranteed to be the same behavior over different releases
 # this also demonstrates INCORRECT USAGE of the package,
 #	but is necessary to test for the expected behavior of the CURRENT release
@@ -118,3 +125,4 @@ if __name__ == '__main__':
 	test_dirty()
 	test_bad_dirty()
 	test_cache()
+	test_function()

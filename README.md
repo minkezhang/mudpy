@@ -60,7 +60,8 @@ class Pie(..., Mud):
 
 Features
 ----
-The `Mud` class will work for property setters as well as instance variables.
+The `Mud` class will check for dirty fields as a result of @property setters, as well as instance variables. It will **not** check for method changes (as these are not 
+typically written to file).
 
 Caveats
 ----
