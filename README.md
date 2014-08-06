@@ -75,7 +75,14 @@ guard, thus replacing the more conventional, but less flexible, [django-dirtyfie
 from django.db import models
 from mudpy.Mud import Mud
 
-class DBPie(models.Model, Mud):
+class DjangoPie(models.Model, Mud):
+	def __init__(self, *args, **kwargs):
+		# all instance-related fields are handled by Django
+		super(DBPie, self).__init__(*args, **kwargs)
+
+		# for the side-effect of setting is_dirty and initializing the cache
+		Mud.__init__(self)
+
 	def save(self, *args, **kwargs):
 		# self.id evaluates to False upon a new request (and so needs to be saved)
 		if not self.is_dirty and self.id:
