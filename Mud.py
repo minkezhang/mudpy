@@ -1,6 +1,6 @@
 from copy import deepcopy
 
-class DirtyDetector(object):
+class Mud(object):
 	def __init__(self, **kwargs):
 		property_keys = [ k for k, v in self.__class__.__dict__.items() if type(v) is property ]
 		for k in kwargs.keys():
@@ -31,7 +31,7 @@ class DirtyDetector(object):
 		if k in ('__cache__', '__is_dirty__'):
 			raise AttributeError('%s is a reserved variable' % k)
 
-		# calling Derived.var = val before calling DirtyDetector.__init__
+		# calling Derived.var = val before calling Mud.__init__
 		if '__is_dirty__' not in self.__dict__:
 			self.__dict__['__is_dirty__'] = False
 		if '__cache__' not in self.__dict__:
@@ -45,15 +45,15 @@ class DirtyDetector(object):
 			# only add an entry to the cache if the property already exists
 			elif k not in self.__dict__['__cache__']:
 				self.__dict__['__cache__'][k] = deepcopy(getattr(self, k, None))
-		super(DirtyDetector, self).__setattr__(k, v)
+		super(Mud, self).__setattr__(k, v)
 
 	def __getattribute__(self, k):
 		if k in ('__cache__', '__is_dirty__'):
 			raise AttributeError('%s is a reserved variable' % k)
 		if k in ('__dict__', '__class__'):
-			return super(DirtyDetector, self).__getattribute__(k)
+			return super(Mud, self).__getattribute__(k)
 
-		# calling Derived.var before calling DirtyDetector.__init__
+		# calling Derived.var before calling Mud.__init__
 		if '__is_dirty__' not in self.__dict__:
 			self.__dict__['__is_dirty__'] = False
 		if '__cache__' not in self.__dict__:
@@ -62,9 +62,9 @@ class DirtyDetector(object):
 		if not self.__dict__['__is_dirty__'] and k != 'is_dirty':
 			if k not in self.__dict__['__cache__']:
 				# saves a copy of the field at time of access
-				self.__dict__['__cache__'][k] = deepcopy(super(DirtyDetector, self).__getattribute__(k))
+				self.__dict__['__cache__'][k] = deepcopy(super(Mud, self).__getattribute__(k))
 
-		return super(DirtyDetector, self).__getattribute__(k)
+		return super(Mud, self).__getattribute__(k)
 
 	@property
 	def is_dirty(self):

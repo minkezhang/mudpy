@@ -10,20 +10,20 @@ the `is_dirty` bit is not set.
 
 Usage
 ----
-Objects that inherit the `DirtyDetector` class will be able to reference a field `DirtyDetector.is_dirty` to query if the object has been changed since 
+Objects that inherit the `Mud` class will be able to reference a field `Mud.is_dirty` to query if the object has been changed since 
 initialization.
 
-Calling `DirtyDetector.save` will reset the `is_dirty` field to `False`.
+Calling `Mud.save` will reset the `is_dirty` field to `False`.
 
-An example usage case can be found in `ImplementedClass.py`.
+An example usage case can be found in `BakedPie.py` (a ``cooked'' mud pie).
 
 Features
 ----
-The `DirtyDetector` class will work for property setters as well as instance variables.
+The `Mud` class will work for property setters as well as instance variables.
 
 Caveats
 ----
-The `DirtyDetector` class employs reserved variables `__cache__` and `__is_dirty__` -- undefined behavior will result if the user attempts to alter these fields 
-manually. `DirtyDetector.__getattribute__` and `DirtyDetector.__setattr__` employs guards to ensure these fields are not accessed via a call such as 
+The `Mud` class employs reserved variables `__cache__` and `__is_dirty__` -- undefined behavior will result if the user attempts to alter these fields 
+manually. `Mud.__getattribute__` and `Mud.__setattr__` employs guards to ensure these fields are not accessed via a call such as 
 `instance.__is_dirty__`, but does **not** guard against direct dictionary manipulation (e.g. `instance.__dict__['__is_dirty__']`) of these two fields, or indeed **any** 
 instance field in this manner.

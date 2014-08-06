@@ -1,14 +1,14 @@
-from DirtyDetector import DirtyDetector
+from Mud import Mud
 
 # example usage
-class ImplementedClass(DirtyDetector):
+class BakedPie(Mud):
 	def __init__(self, **kwargs):
 		self.visible = None
 		self._virtual_ = None
 		self.list = []
 		# sets self.visible if 'visible' exist in **kwargs
 		# sets self._virtual_ if '_virtual_' OR 'virtual' exists in **kwargs
-		super(ImplementedClass, self).__init__(**kwargs)
+		super(BakedPie, self).__init__(**kwargs)
 
 	@property
 	def virtual(self):
@@ -38,4 +38,4 @@ class ImplementedClass(DirtyDetector):
 		if self.is_dirty:
 			pass
 		# this line must be included to reset the cache
-		super(ImplementedClass, self).save()
+		super(BakedPie, self).save()

@@ -1,7 +1,7 @@
-from ImplementedClass import ImplementedClass
+from BakedPie import BakedPie
 
 def implemented_instance():
-	return ImplementedClass(
+	return BakedPie(
 		# these fields will set upon initialization
 		visible = 'visible',
 		virtual = 'virtual',
@@ -15,7 +15,7 @@ def implemented_instance():
 # attempting to alter reserved keyword upon init results in a thrown exception
 def test_bad_init():
 	try:
-		ImplementedClass(
+		BakedPie(
 			__cache__ = {}
 		)
 		success = False
