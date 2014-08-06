@@ -61,7 +61,7 @@ class Pie(..., Mud):
 ```
 
 **NB** Strictly speaking, `Pie.cook_time` is a class attribute and cannot be modified; `p.cook_time = ...` will simply create a new instance variable to override the 
-class attribute, which is detected by `Mud.is_dirty`. See (StackOverflow)[http://stackoverflow.com/questions/6475321/global-variable-python-classes] for more 
+class attribute, which is detected by `Mud.is_dirty`. See [StackOverflow](http://stackoverflow.com/questions/6475321/global-variable-python-classes) for more 
 information.
 
 Features
