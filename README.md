@@ -23,6 +23,8 @@ from Mud import Mud
 # we're taking the joke and beating it to the ground
 # note that Mud comes last in the inheritance chain to preserve expected super(...) behavior
 class Pie(..., Mud):
+	# class attribute
+	cook_time = None
 	def __init__(self, *args, **kwargs):
 		# set some instance variables
 		self.filling = None
@@ -58,9 +60,26 @@ class Pie(..., Mud):
 		Mud.save(self)
 ```
 
+**NB** Strictly speaking, `Pie.cook_time` is a class attribute and cannot be modified; `p.cook_time = ...` will simply create a new instance variable to override the 
+class attribute, which is detected by `Mud.is_dirty`. See (StackOverflow)[http://stackoverflow.com/questions/6475321/global-variable-python-classes] for more 
+information.
+
 Features
 ----
-The `Mud` class will check for dirty fields as a result of @property setters, as well as instance variables, **as well as** method changes.
+The `Mud` class will check for dirty fields as a result of @property setters, instance variables, **as well as** method changes.
+
+Furthermore, `Mud` can be inherited from Django classes (appending to the end of the list of inherited classes) and function as an (almost) drop-in conditional save 
+guard, thus replacing the more conventional, but less flexible, [django-dirtyfields](https://github.com/smn/django-dirtyfields) package:
+
+```
+class DBPie(Models.Model, Mud):
+	def save(self, *args, **kwargs):
+		# self.id evaluates to False upon a new request (and so needs to be saved)
+		if not self.is_dirty and self.id:
+			return
+		# ...
+		Mud.save(self)
+```
 
 Caveats
 ----

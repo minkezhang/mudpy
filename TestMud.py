@@ -86,6 +86,11 @@ def test_dirty():
 	assert a.visible == 'new_visible'
 	assert a.virtual == 'new_virtual'
 	assert a.list == [0]
+	a.save()
+	assert a.class_var == 'class_var'
+	a.class_var = 'new_class_var'
+	assert a.class_var == 'new_class_var'
+	assert a.is_dirty == True
 
 def test_function():
 	a = implemented_instance()

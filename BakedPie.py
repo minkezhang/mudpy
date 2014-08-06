@@ -5,6 +5,7 @@ from Mud import Mud
 #	class A(B, C, D, ..., Mud)
 # this preserves expected super(...) behavior
 class BakedPie(Mud):
+	class_var = 'class_var'
 	def __init__(self, **kwargs):
 		self.visible = None
 		self._virtual_ = None
