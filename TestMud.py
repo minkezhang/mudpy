@@ -21,6 +21,13 @@ def test_bad_init():
 		success = False
 	except AttributeError:
 		success = True
+	try:
+		BakedPie(
+			__is_dirty__ = {}
+		)
+		success = False
+	except AttributeError:
+		success = True
 	assert success == True
 
 # attemptig to get or set reserved keywords results in a thrown exception
@@ -32,7 +39,17 @@ def test_bad_dirty():
 	except AttributeError:
 		success = True
 	try:
+		a.__is_dirty__ = {}
+		success = False
+	except AttributeError:
+		success = True
+	try:
 		a.__cache__
+		success = False
+	except AttributeError:
+		success = True
+	try:
+		a.__is_dirty__
 		success = False
 	except AttributeError:
 		success = True
