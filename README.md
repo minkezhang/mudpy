@@ -68,7 +68,7 @@ Features
 ----
 The `Mud` class will check for dirty fields as a result of @property setters, instance variables, **as well as** method changes.
 
-Furthermore, `Mud` can be inherited from Django classes (appending to the end of the list of inherited classes) and function as an (almost) drop-in conditional save 
+Furthermore, `Mud` can be inherited by Django models (appending to the end of the list of inherited classes) and function as an (almost) drop-in conditional save 
 guard, thus replacing the more conventional, but less flexible, [django-dirtyfields](https://github.com/smn/django-dirtyfields) package:
 
 ```
