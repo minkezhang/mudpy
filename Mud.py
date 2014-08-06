@@ -50,7 +50,10 @@ class Mud(object):
 	def __getattribute__(self, k):
 		if k in ('__cache__', '__is_dirty__'):
 			raise AttributeError('%s is a reserved variable' % k)
-		if k in ('__dict__', '__class__'):
+
+		# reserved, read-only attributes
+		# cf. http://bit.ly/UUml3F
+		if k in ('__dict__', '__class__', '__bases__', '__name__', '__mro__'):
 			return super(Mud, self).__getattribute__(k)
 
 		# calling Derived.var before calling Mud.__init__
