@@ -25,6 +25,7 @@ class Pie(Mud):
 	def __init__(self, *args, **kwargs):
 		# set some instance variables
 		self.filling = None
+
 		# will attempt to set 'filling' and 'is_cooked', but not 'chef'
 		super(Pie, self).__init__(**kwargs)
 
@@ -32,12 +33,12 @@ class Pie(Mud):
 	@property
 	def is_cooked(self):
 		# ...
-		return
+		return None
 
 	@is_cooked.setter
 	def is_cooked(self, v):
 		# ...
-		return
+		pass
 
 	# read-only property
 	@property
