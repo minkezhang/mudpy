@@ -15,7 +15,7 @@ initialization.
 
 Calling `Mud.save` will reset the `is_dirty` field to `False`.
 
-An example usage case can be found in `BakedPie.py` (a ``cooked'' mud pie).
+An example usage case can be found in `BakedPie.py` (a ''cooked'' mud pie).
 
 Features
 ----
