@@ -128,10 +128,14 @@ p.save()
 ```
 
 Moreover, as per [Python2](https://docs.python.org/2/library/stdtypes.html#special-attributes) and 
-[Python3](https://docs.python.org/3/library/stdtypes.html#special-attributes) documentation, several read-only variables are not guarded against changes:
+[Python3](https://docs.python.org/3/library/stdtypes.html#special-attributes) documentation, there are several read-only variables which cannot be set directly. `Mud` 
+guards these variables specifically by throwing an `AttributeError` when user attempts to set these variables:
 
 ```
 p = BakedPie()
+
+# this is okay
+p.__dict__
 
 # throws an error because the user is a bad, bad person
 #
