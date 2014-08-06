@@ -104,6 +104,8 @@ def test_cache():
 	assert a.__dict__['__is_dirty__'] == False
 	# do not reset cache if is_dirty == False
 	assert set(a.__dict__['__cache__'].keys()) == set(['list', 'virtual', '_virtual_'])
+	a.list = [0]
+	a.save()
 	a.list
 	a.visible
 	a.new_variable = None

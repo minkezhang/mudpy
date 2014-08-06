@@ -57,8 +57,12 @@ class Mud(object):
 		if k in ('__dict__', '__methods__', '__members__', '__class__', '__bases__', '__name__', '__mro__'):
 			return super(Mud, self).__getattribute__(k)
 
-		if k in dir(self):
+		# test for method queries
+		try:
+			super(Mud, self).__getattribute__(k).im_self
 			return super(Mud, self).__getattribute__(k)
+		except AttributeError:
+			pass
 
 		# calling Derived.var before calling Mud.__init__
 		if '__is_dirty__' not in self.__dict__:
