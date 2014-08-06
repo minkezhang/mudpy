@@ -81,6 +81,7 @@ def test_dirty():
 	assert a.is_dirty == True
 	a.save()
 	# the variable was READ from the object, but was change EXTERNALLY -- we should be able to detect this change
+	print('list.append')
 	a.list.append(0)
 	assert a.is_dirty == True
 	assert a.visible == 'new_visible'
@@ -102,7 +103,6 @@ def test_cache():
 	a.save()
 	assert a.__dict__['__is_dirty__'] == False
 	# do not reset cache if is_dirty == False
-	print a.__dict__['__cache__'].keys()
 	assert set(a.__dict__['__cache__'].keys()) == set(['list', 'virtual', '_virtual_'])
 	a.list
 	a.visible

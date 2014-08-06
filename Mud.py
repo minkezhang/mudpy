@@ -3,7 +3,7 @@ from copy import deepcopy
 class Mud(object):
 	def __init__(self, **kwargs):
 		property_keys = [ k for k, v in self.__class__.__dict__.items() if type(v) is property ]
-		for k in kwargs.keys():
+		for k in list(kwargs.keys()):
 			if k in ('__cache__', '__is_dirty__'):
 				raise AttributeError('%s is a reserved variable' % k)
 			# only update the appropriate class var if
@@ -52,8 +52,9 @@ class Mud(object):
 			raise AttributeError('%s is a reserved variable' % k)
 
 		# reserved, read-only attributes
+		# backwards-compatible and auto-escapes loop when k in ('__methods__', '__members__')
 		# cf. http://bit.ly/UUml3F
-		if k in ('__dict__', '__class__', '__bases__', '__name__', '__mro__'):
+		if k in ('__dict__', '__methods__', '__members__', '__class__', '__bases__', '__name__', '__mro__'):
 			return super(Mud, self).__getattribute__(k)
 
 		if k in dir(self):
