@@ -137,9 +137,7 @@ p = BakedPie()
 # this is okay
 p.__dict__
 
-# throws an error because the user is a bad, bad person
-#
-# who doesn't deserve pies
+# throws an error because the user is a bad, bad person who doesn't deserve pies
 try:
 	p.__dict__ = 3.14
 except AttributeError:
