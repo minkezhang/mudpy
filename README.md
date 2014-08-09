@@ -1,15 +1,18 @@
 MudPy
 ====
+
 introspection on crack
 
 Overview
 ----
+
 One of the key aspects of programming is to write data onto the disk -- however, we do not wish to uselessly write data if it has not changed. Commonly, a `is_dirty` 
 variable is employed as part of the data abstraction to mark when said data has been altered. Upon saving the data, a program can skip the disk-write portion of code if 
 the `is_dirty` bit is not set.
 
 Usage
 ----
+
 Objects that inherit the `Mud` class will be able to reference a field `Mud.is_dirty` to query if the object has been changed since 
 initialization.
 
@@ -66,6 +69,7 @@ information.
 
 Features
 ----
+
 The `Mud` class will check for dirty fields as a result of @property setters, instance variables, **as well as** method changes.
 
 Furthermore, `Mud` can be inherited by Django models (appending to the end of the list of inherited classes) and function as an (almost) drop-in conditional save 
@@ -93,6 +97,7 @@ class DjangoPie(models.Model, Mud):
 
 Caveats
 ----
+
 The `Mud` class employs reserved variables `__cache__` and `__is_dirty__` -- undefined behavior will result if the user attempts to alter these fields manually. 
 `Mud.__getattribute__` and `Mud.__setattr__` employs guards to ensure these fields are not accessed via a call such as `instance.__is_dirty__`, but does **not** guard 
 against direct dictionary manipulation (e.g. `instance.__dict__['__is_dirty__']`) of these two fields; indeed, direct dictionary manipulation of **any** instance 
@@ -148,4 +153,6 @@ assert p.is_dirty == False
 
 Contact
 ----
+
+* [github](https://github.com/cripplet/mudpy)
 * [gmail](mailto:minke.zhang@gmail.com)
